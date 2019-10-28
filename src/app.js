@@ -1,9 +1,10 @@
 import React from 'react';
 import './app.css';
-import profile from './assets/Odin.PNG';
+
+import TechList from './components/TechList';
 
 function App() {
-  return <img width="200" src={ profile } alt="Odin"/>
+  return <TechList />
 }
 
 export default App();
