@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 class TechList extends Component {
   state = {
+    newTech: '',
     techs: [
       'NodeJS', 
       'ReactJS',
@@ -9,15 +10,36 @@ class TechList extends Component {
     ]
   };
 
-  render() {
-    console.log(this.state);
+  // Função própria dentro de um componente de classe deve  ser escrita em arrow 
+  // function para que tenha acesso ao this, ou seja, acessar outras propriedades
+  // ou outras funções da classe
+  handleInputChange = e => {
+    this.setState({ newTech: e.target.value });
+  }
+
+  handleSubmit = e => {
+    e.preventDefault();
     
+    this.setState({ 
+      techs: [...this.state.techs, this.state.newTech],
+      newTech: ''
+    });
+  }
+
+  render() {
     return (
-      <ul>
-        <li>Node JS</li>
-        <li>React JS</li>
-        <li>React Native</li>
-      </ul>
+      <form onSubmit={ this.handleSubmit }>
+      <h1>{ this.state.newTech }</h1>
+        <ul>
+          { this.state.techs.map(tech => <li key={ tech }>{ tech }</li>) }
+        </ul>
+        <input 
+          type="text" 
+          onChange={ this.handleInputChange } 
+          value={ this.state.newTech } 
+        />
+        <button type="submit">Enviar</button>
+      </form>
     );
   }
 }
